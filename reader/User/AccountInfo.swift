@@ -10,4 +10,6 @@ import UIKit
 
 class AccountInfo: NSObject {
 
+    var accountId:Int!
+    
 }

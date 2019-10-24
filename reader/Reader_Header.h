@@ -8,6 +8,7 @@
 
 #ifndef Reader_Header_h
 #define Reader_Header_h
-
+#import "MJRefresh.h"
+#import <SDWebImage/SDWebImage.h>
 
 #endif /* Reader_Header_h */

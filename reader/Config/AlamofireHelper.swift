@@ -27,11 +27,11 @@ extension AlamofireHelper{
     // MARK: - 发送POST请求
     func postRequest(url:String, params:[String:Any], completion:@escaping(_ response:[String:AnyObject]?,_ error:NSError?)->()) {
         let url = REQUEST_URL + url
-        let userInfo = PreferenceUtil.getAccountInfo()
+        //let userInfo = PreferenceUtil.getAccountInfo()
         let headers: HTTPHeaders = [
             "Content-Type":"application/json;charset=utf-8",
             "Accept": "application/json",
-            "sessionVisitor": userInfo.accountName
+            "sessionVisitor": ""
         ]
         Alamofire.request(url, method: .post, parameters: params,encoding: JSONEncoding.default, headers: headers)
             .responseJSON { (response) in
@@ -44,15 +44,23 @@ extension AlamofireHelper{
     }
     
     // MARK: - 发送GET请求
-    func getRequest(url:String,params:[String:Any]?,completion:@escaping(_ response:[String:AnyObject]?,_ error:NSError?) -> ()){
-        let url = REQUEST_URL + url
-        let userInfo = PreferenceUtil.getAccountInfo()
+    func getRequest(url:String,params:[String:String]?,completion:@escaping(_ response:[String:AnyObject]?,_ error:NSError?) -> ()){
+        var url = REQUEST_URL + url
+        var paramString = ""
+        for param in params!{
+            paramString += param.key + "=" + param.value + "&"
+        }
+        if paramString != ""{
+            paramString = "?" + paramString.substring(NSRange.init(location: 0, length: paramString.length - 1))
+        }
+        url = url + paramString
+        paramString = ""
         let headers: HTTPHeaders = [
             "Content-Type":"application/json;charset=utf-8",
             "Accept": "application/json",
-            "sessionVisitor": userInfo.accountName
+            "sessionVisitor": ""
         ]
-        Alamofire.request(url, method: .get, parameters: params, headers: headers)
+        Alamofire.request(url, method: .get, headers: headers)
             .responseJSON{ response in
                 switch response.result {
                 case .success( _):

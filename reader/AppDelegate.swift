@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window!.backgroundColor = UIColor.white
+        window!.rootViewController = MyTabBarController.initTabBar()
+        //测试广告单元ID：ca-app-pub-3940256099942544/2934735716
+        //正式广告appID：ca-app-pub-3542989549346775~2445331214
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         return true
     }
 
