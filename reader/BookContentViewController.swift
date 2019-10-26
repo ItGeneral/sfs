@@ -102,7 +102,7 @@ class BookContentViewController: UIViewController {
         headerView.backgroundColor = .white
         self.view.addSubview(headerView)
         headerView.mas_makeConstraints { (make: MASConstraintMaker!) in
-            make.top.mas_equalTo()(85)
+            make.top.mas_equalTo()(NavgationBarHeight)
             make.width.mas_equalTo()(screenWidth)
             make.height.mas_equalTo()(50)
         }
@@ -285,7 +285,7 @@ extension BookContentViewController: UITableViewDataSource, UITableViewDelegate{
         AlamofireHelper.shareInstance.postRequest(url: url, params: param, completion: {(result, error) in
             let json = JSON(result as Any)
             let list = json["data"].array!
-            let code = json["errorCode"].int!
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code != 200 {
                 CLToast.cl_show(msg: "网络异常，请稍后重试")
                 return

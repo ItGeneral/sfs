@@ -23,8 +23,10 @@ class MyTabBarController: UITabBarController {
         let bookShelfNav = NavController(rootViewController: BookShelfViewController())
         let bookShelfBarItem = UITabBarItem(title: "书架", image: UIImage.init(named: "stock"), selectedImage: nil)
         
+        
         let bookMallNav = NavController(rootViewController: BookMallViewController())
         let bookMallTabBarItem = UITabBarItem(title: "书城", image: UIImage.init(named: "stock"), selectedImage: nil)
+        
         
         let userNav = NavController(rootViewController: UserViewController())
         let userTabBarItem = UITabBarItem(title: "我的", image: UIImage.init(named: "stock"), selectedImage: nil)

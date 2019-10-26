@@ -12,7 +12,7 @@ import Masonry
 class ReadingMenuBottomView: UIView {
 
     /// 目录
-    private var catalogue:UIImageView!
+    private var catalogue:UIButton!
     
     /// 设置
     private var setting:UIImageView!
@@ -53,6 +53,20 @@ class ReadingMenuBottomView: UIView {
         let previousChapterTap = UITapGestureRecognizer.init(target: self, action: #selector(loadPreviousChapter))
         previousChapter.addGestureRecognizer(previousChapterTap)
         
+        catalogue = UIButton.init()
+        catalogue.setImage(UIImage.init(named: "bar_content")!.withRenderingMode(.alwaysOriginal), for: .normal)
+        catalogue.setTitleColor(UIColor.color230(), for: .normal)
+        catalogue.addTarget(self, action: #selector(showContentView), for: .touchUpInside)
+        addSubview(catalogue)
+        let catalogueLeft = screenWidth / 2 - 25
+        catalogue.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.left.mas_equalTo()(catalogueLeft)
+            make.top.mas_equalTo()(20)
+            make.width.mas_equalTo()(25)
+            make.height.mas_equalTo()(25)
+        }
+        
+        
         nextChapter = UILabel.init()
         nextChapter.text = "下一章"
         nextChapter.isUserInteractionEnabled = true
@@ -85,6 +99,13 @@ class ReadingMenuBottomView: UIView {
             previousChapter.textColor = .color230()
             delegate.loadNextOrPreviousChapter(isNext: false)
         }
+        
+    }
+    
+    /// 点击目录
+    @objc func showContentView(){
+        
+        delegate.clickCatalogue()
         
     }
     

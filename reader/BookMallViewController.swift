@@ -32,11 +32,11 @@ class BookMallViewController: UIViewController {
     
     var typeLabelList = [TypeIconMap]()
     
+    var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .backgroundColor()
-        self.navigationController?.navigationBar.isHidden = true
         
         //初始化第一个section
         self.typeLabelList.append(TypeIconMap.init(type: "现代都市", icon: "modern_book_icon"))
@@ -62,37 +62,54 @@ class BookMallViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.tabBarController?.tabBar.isHidden = false
+        
         self.navigationController?.navigationBar.isHidden = true
+    
+        
     }
     
     /// 初始化searchbar
     func initSearchView(){
-        let searchBar : UISearchBar = UISearchBar.init()
+        
+        let searchBar = UISearchBar.init()
+        
+        searchBar.setBackgroundImage(UIColor.backgroundColor().trans2Image(), for: .any, barMetrics: .default)
         
         searchBar.placeholder = "搜索书城"
+
+        searchBar.barTintColor = .white
         
-        searchBar.backgroundImage = UIImage.init()
-        
-        searchBar.image(for: .search, state: .normal)
-        
-        searchBar.showsBookmarkButton = true
-        
-        searchBar.backgroundColor = .color166()
+        searchBar.delegate = self
         
         searchView = UIView.init()
-        
-        searchView.backgroundColor = .white
+
+        searchView.backgroundColor = .backgroundColor()
         
         searchView.addSubview(searchBar)
         searchBar.mas_makeConstraints { (make: MASConstraintMaker!) in
-            make.left.mas_equalTo()(10)
-            make.width.mas_equalTo()(screenWidth - 100)
+            make.left.mas_equalTo()(5)
+            make.width.mas_equalTo()(screenWidth - 120)
             make.height.mas_equalTo()(50)
+        }
+
+        let allBookBtn = UIButton.init()
+        allBookBtn.setTitle("全部书籍", for: .normal)
+        allBookBtn.tintColor = .white
+        allBookBtn.backgroundColor = .color145()
+        allBookBtn.layer.cornerRadius = 15
+        allBookBtn.addTarget(self, action: #selector(goToAllBookController), for: .touchDown)
+        searchView.addSubview(allBookBtn)
+        allBookBtn.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.top.mas_equalTo()(7)
+            make.left.mas_equalTo()(searchBar.mas_right)?.offset()(5)
+            make.height.mas_equalTo()(35)
+            make.width.mas_equalTo()(100)
         }
         
         self.view.addSubview(searchView)
-        
+
         searchView.mas_makeConstraints { (make: MASConstraintMaker!) in
             make.top.mas_equalTo()(self.view.mas_safeAreaLayoutGuideTop)
             make.width.mas_equalTo()(screenWidth)
@@ -101,6 +118,14 @@ class BookMallViewController: UIViewController {
         
     }
     
+    /// 跳转所有数据页面
+    @objc func goToAllBookController(){
+        let controller = BookListViewController()
+        
+        controller.keyWord = ""
+        
+        self.navigationController?.pushViewController(controller, animated: false)
+    }
     
     func setCollectionView() {
         let layout = UICollectionViewFlowLayout.init()
@@ -128,6 +153,7 @@ class BookMallViewController: UIViewController {
     }
     
 }
+
 extension BookMallViewController:UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate{
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -211,7 +237,7 @@ extension BookMallViewController:UICollectionViewDataSource, UICollectionViewDel
         AlamofireHelper.shareInstance.postRequest(url: url, params: [:], completion: {(result, error) in
             let json = JSON(result as Any)
             let bookDictionary = json["data"].dictionary
-            let code = json["errorCode"].int!
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code != 200 {
                 CLToast.cl_show(msg: "网络异常，请稍后重试")
                 return
@@ -296,6 +322,17 @@ extension BookMallViewController:UICollectionViewDataSource, UICollectionViewDel
         let controller = BookListViewController()
         controller.setBookType(bookType: sender.name!)
         self.navigationController?.pushViewController(controller, animated: false)
+    }
+    
+}
+
+extension BookMallViewController: UISearchBarDelegate{
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        let controller = BookSearchController()
+        
+        self.navigationController?.pushViewController(controller, animated: false)
+        
     }
     
     

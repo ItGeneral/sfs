@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Masonry
 
 class ReadingViewTopView: UIView {
 
@@ -49,14 +50,13 @@ class ReadingViewTopView: UIView {
         super.layoutSubviews()
         
         let w = frame.size.width
-        let h = frame.size.height
         // label的宽度
         let labelW = (w - 15 * (screenWidth / 375)) / 2
         // 书名
-        bookName.frame = CGRect(x: 0, y: 0, width: labelW, height: h)
-        
+        bookName.frame = CGRect(x: 0, y: 15, width: labelW, height: 35)
+
         // 章节名
-        chapterName.frame = CGRect(x: w - labelW, y: 0, width: labelW, height: h)
+        chapterName.frame = CGRect(x: w - labelW, y: 15, width: labelW, height: 35)
     }
 
 }

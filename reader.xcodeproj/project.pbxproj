@@ -54,6 +54,8 @@
 		9AECA4FA235EA3840070984F /* ReadColorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4F9235EA3840070984F /* ReadColorConfig.swift */; };
 		9AECA4FC235EDCCC0070984F /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4FB235EDCCC0070984F /* AccountInfo.swift */; };
 		9AECA4FE236142080070984F /* BookSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4FD236142080070984F /* BookSearchController.swift */; };
+		9AECA500236292030070984F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4FF236292030070984F /* BaseViewController.swift */; };
+		9AECA50223649A570070984F /* ReadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA50123649A560070984F /* ReadingContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +131,8 @@
 		9AECA4F9235EA3840070984F /* ReadColorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadColorConfig.swift; sourceTree = "<group>"; };
 		9AECA4FB235EDCCC0070984F /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
 		9AECA4FD236142080070984F /* BookSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchController.swift; sourceTree = "<group>"; };
+		9AECA4FF236292030070984F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		9AECA50123649A560070984F /* ReadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingContentView.swift; sourceTree = "<group>"; };
 		9C8B4C6396ED62E6FB93BF58 /* Pods-reader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reader.debug.xcconfig"; path = "Target Support Files/Pods-reader/Pods-reader.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -330,6 +334,7 @@
 				9A2B32A7234747C80016AC8D /* BookListViewController.swift */,
 				9A39323923559B3400409C23 /* BookContentViewController.swift */,
 				9AECA4FD236142080070984F /* BookSearchController.swift */,
+				9AECA4FF236292030070984F /* BaseViewController.swift */,
 			);
 			name = Book;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				9A2B32A3234732680016AC8D /* BookMallCollectionCell.swift */,
 				9A85248B234D882A003E9755 /* BookListTableViewCell.swift */,
 				9A3932372353024C00409C23 /* BookDetailView.swift */,
+				9AECA50123649A560070984F /* ReadingContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -557,6 +563,7 @@
 				9A39323C2357047E00409C23 /* LoadingView.swift in Sources */,
 				9A393304235AC5E900409C23 /* ReadPageModel.swift in Sources */,
 				9ACF70332344312800ED8297 /* BookShelfViewController.swift in Sources */,
+				9AECA500236292030070984F /* BaseViewController.swift in Sources */,
 				9ACF703923444E9C00ED8297 /* BookShelfModel.swift in Sources */,
 				9A3932FE235AAC2400409C23 /* ReadPublic.swift in Sources */,
 				9ACF703623444B4800ED8297 /* BookShelfCollectionViewCell.swift in Sources */,
@@ -564,6 +571,7 @@
 				9A393312235D520A00409C23 /* LineViewUtil.swift in Sources */,
 				9AECA4FC235EDCCC0070984F /* AccountInfo.swift in Sources */,
 				9ACF703123436CAC00ED8297 /* MyTabBarController.swift in Sources */,
+				9AECA50223649A570070984F /* ReadingContentView.swift in Sources */,
 				9A7022652341E4D600A65941 /* AlamofireHelper.swift in Sources */,
 				9A2B32A22344D21E0016AC8D /* BookChapterModel.swift in Sources */,
 				9AECA4FE236142080070984F /* BookSearchController.swift in Sources */,

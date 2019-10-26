@@ -34,9 +34,6 @@ class ReadViewScrollController: UIViewController {
     /// 头部试图
     var topView:ReadingViewTopView!
     
-    /// 底部视图
-    var bottomView:ReadingViewBottomView!
-    
     /// 记录滚动坐标
     private var scrollPoint:CGPoint!
     

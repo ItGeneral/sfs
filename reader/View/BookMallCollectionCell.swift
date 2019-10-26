@@ -48,7 +48,6 @@ class BookMallCollectionCell: UICollectionViewCell {
             subView.removeFromSuperview()
         }
         
-        let viewWidth = (screenWidth - 100)/4
         let iconImageView = UIImageView.init()
         iconImageView.image = UIImage.init(named: icon)
         self.contentView.addSubview(iconImageView)
@@ -63,7 +62,7 @@ class BookMallCollectionCell: UICollectionViewCell {
         typeLable.textAlignment = .center
         self.contentView.addSubview(typeLable)
         typeLable.mas_makeConstraints { (make: MASConstraintMaker?) in
-            make?.width.mas_equalTo()(viewWidth)
+            make?.width.mas_equalTo()(contentView.frame.width)
             make?.top.mas_equalTo()(iconImageView.mas_bottom)?.offset()(10)
         }
     }

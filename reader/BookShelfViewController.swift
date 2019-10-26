@@ -17,16 +17,69 @@ class BookShelfViewController: UIViewController {
     
     var bookShelfModelList = [BookShelfModel]()
     
+    var addBookShelfView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        getBookShelfData()
+
         initCollentionView()
+        
+        initAddBookShelfView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
         getBookShelfData()
+    }
+    
+    func initAddBookShelfView() {
+        
+        addBookShelfView = UIView.init()
+        
+        addBookShelfView.backgroundColor = .backgroundColor()
+        
+        self.view.addSubview(addBookShelfView)
+        
+        addBookShelfView.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.center.mas_equalTo()(view)
+            make.width.mas_equalTo()((screenWidth - 40)/3)
+            make.height.mas_equalTo()(185)
+        }
+        
+        let iconAddButton = UIButton.init()
+
+        iconAddButton.setImage(UIImage.init(named: "icon_add"), for: .normal)
+        
+        addBookShelfView.addSubview(iconAddButton)
+        
+        iconAddButton.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.center.mas_equalTo()(addBookShelfView)
+            make.width.mas_equalTo()(30)
+            make.height.mas_equalTo()(30)
+        }
+        
+        iconAddButton.addTarget(self, action: #selector(doAddBookShelf), for: .touchUpInside)
+        
+        addBookShelfView.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(doAddBookShelf))
+        
+        addBookShelfView.addGestureRecognizer(tap)
+        
+        if self.bookShelfModelList.count > 0{
+            addBookShelfView.isHidden = true
+        }else {
+            addBookShelfView.isHidden = false
+        }
+        
+    }
+    
+    /// 去书城添加书架
+    @objc func doAddBookShelf(){
+        
+        self.tabBarController?.selectedIndex = 0
+        
     }
     
     func initCollentionView() {
@@ -45,9 +98,10 @@ class BookShelfViewController: UIViewController {
         collectionView?.showsVerticalScrollIndicator = false
         self.view.addSubview(collectionView!)
         collectionView?.mas_makeConstraints({ (make : MASConstraintMaker?) in
-            make?.top.mas_equalTo()(20)
+            make?.top.mas_equalTo()(self.view.mas_safeAreaLayoutGuideTop)
             make?.width.mas_equalTo()(screenWidth)
             make?.height.mas_equalTo()(screenHeight)
+            make?.bottom.mas_equalTo()(self.view.mas_safeAreaLayoutGuideBottom)
         })
         
         //注册cell
@@ -64,7 +118,7 @@ class BookShelfViewController: UIViewController {
             self.bookShelfModelList = []
             let json = JSON(result as Any)
             let indexList = json["data"].array
-            let code = json["errorCode"].int!
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code != 200 {
                 CLToast.cl_show(msg: "网络异常，请稍后重试")
                 return
@@ -81,6 +135,14 @@ class BookShelfViewController: UIViewController {
                 self.bookShelfModelList.append(bookShelf)
             }
             self.collectionView?.reloadData()
+            
+            if self.bookShelfModelList.count > 0 {
+                self.addBookShelfView.isHidden = true
+            }else {
+                self.addBookShelfView.isHidden = false
+            }
+            
+            
         })
     }
 

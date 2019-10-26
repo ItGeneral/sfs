@@ -22,6 +22,7 @@ class BookDetailViewController: UIViewController,UIGestureRecognizerDelegate {
     var contentLabel = UILabel.init()
     
     var scrollView:UIScrollView!
+    
     var collectionView:UICollectionView!
     
     
@@ -65,7 +66,7 @@ class BookDetailViewController: UIViewController,UIGestureRecognizerDelegate {
         AlamofireHelper.shareInstance.postRequest(url: url, params: [:], completion: {(result, error) in
             let json = JSON(result as Any)
             let bookDetail = JSON(json["data"])
-            let code = json["errorCode"].int!
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code != 200 {
                 CLToast.cl_show(msg: "网络异常，请稍后重试")
                 return
@@ -90,8 +91,9 @@ class BookDetailViewController: UIViewController,UIGestureRecognizerDelegate {
         let coverView = UIView.init()
         self.scrollView.addSubview(coverView)
         coverView.backgroundColor = .white
+        let topHeight:CGFloat = (IsX ? 25 : 1)
         coverView.mas_makeConstraints { (make: MASConstraintMaker?) in
-            make?.top.mas_equalTo()(30)
+            make?.top.mas_equalTo()(topHeight)
             make?.height.mas_equalTo()(150)
             make?.width.mas_equalTo()(screenWidth)
         }
@@ -171,6 +173,7 @@ class BookDetailViewController: UIViewController,UIGestureRecognizerDelegate {
         let size = introduceTextView.sizeThatFits(constrainSize)
         introduceTextView.mas_makeConstraints { (make: MASConstraintMaker?) in
             make?.height.mas_equalTo()(size.height)
+            make?.top.mas_equalTo()(0)
             if size.width < screenWidth {
                 make?.width.mas_equalTo()(screenWidth)
             }else {
@@ -217,7 +220,7 @@ class BookDetailViewController: UIViewController,UIGestureRecognizerDelegate {
         self.scrollView.addSubview(tagAndIntroduceView)
         tagAndIntroduceView.mas_makeConstraints { (make: MASConstraintMaker?) in
             make?.top.mas_equalTo()(coverView.mas_bottom)?.offset()(10)
-            make?.height.mas_equalTo()(constrainSize.height)
+            make?.height.mas_equalTo()(size.height)
             make?.width.mas_equalTo()(screenWidth)
         }
         
@@ -249,6 +252,7 @@ class BookDetailViewController: UIViewController,UIGestureRecognizerDelegate {
         
         contentView.addSubview(contentLabel)
         contentLabel.mas_makeConstraints { (make: MASConstraintMaker?) in
+            make?.top.mas_equalTo()(0)
             make?.height.mas_equalTo()(contentView.mas_height)
             make?.left.mas_equalTo()(10)
         }
@@ -296,11 +300,16 @@ class BookDetailViewController: UIViewController,UIGestureRecognizerDelegate {
         self.collectionView?.dataSource = self
         self.collectionView.scrollsToTop = false
         self.collectionView?.showsVerticalScrollIndicator = false
+        self.collectionView.isScrollEnabled = false
         self.scrollView.addSubview(self.collectionView)
+        
+        let collectionViewHeight = coverView.frame.height + size.height + contentView.frame.height + 20
+        
         self.collectionView.mas_makeConstraints { (make: MASConstraintMaker?) in
             make?.top.mas_equalTo()(bottomLine.mas_bottom)?.offset()(0)
             make?.width.mas_equalTo()(screenWidth)
-            make?.height.mas_equalTo()(500)
+            make?.height.mas_equalTo()(580)
+            make?.bottom.mas_equalTo()(0)
         }
         self.collectionView?.register(BookMallCollectionCell.self, forCellWithReuseIdentifier: "BookMallCollectionCell")
         collectionView?.register(BookMallCollectionCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
@@ -309,6 +318,7 @@ class BookDetailViewController: UIViewController,UIGestureRecognizerDelegate {
     }
     
 }
+
 
 extension BookDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -420,6 +430,16 @@ extension BookDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         headerView.addGestureRecognizer(tap)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let bookInfoModel = self.youLikeBookList[indexPath.row]
+        print(bookInfoModel.name)
+        
+        let controller = BookDetailViewController()
+        controller.setBookDetail(bookDetail: bookInfoModel)
+        self.navigationController?.pushViewController(controller, animated: false)
+        
+    }
+    
     
     @objc func clickHeaderView(sender: UIGestureRecognizer) {
         let controller = BookListViewController()
@@ -433,7 +453,7 @@ extension BookDetailViewController: UICollectionViewDelegate, UICollectionViewDa
         AlamofireHelper.shareInstance.postRequest(url: url, params:param, completion: {(result, error) in
             let json = JSON(result as Any)
             let data = JSON(json["data"])
-            let code = json["errorCode"].int!
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code != 200 {
                 CLToast.cl_show(msg: "网络异常，请稍后重试")
                 return
@@ -452,6 +472,13 @@ extension BookDetailViewController: UICollectionViewDelegate, UICollectionViewDa
                 self.youLikeBookList.append(book)
             }
             self.collectionView?.reloadData()
+            
+            let height = self.youLikeBookList.count / 3 * 240
+            
+            self.collectionView.mas_updateConstraints({ (make: MASConstraintMaker!) in
+                make.height.mas_equalTo()(height)
+            })
+            
         })
     }
 }

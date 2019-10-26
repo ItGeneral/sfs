@@ -30,6 +30,15 @@ class BookListViewController: UIViewController {
     let header = MJRefreshNormalHeader()
     let footer = MJRefreshAutoNormalFooter()
     
+    /// 搜索view
+    var searchView: UIView!
+    
+    /// 搜索控件
+    var searchBar: UISearchBar!
+    
+    /// 查询关键字
+    var keyWord:String!
+    
     func setBookType(bookType:String) {
         self.bookType = bookType
     }
@@ -49,16 +58,19 @@ class BookListViewController: UIViewController {
             make?.edges.mas_equalTo()(self.view)
         }
         
+        initSearchView()
+        
         self.tableView = UITableView.init()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.tableFooterView = UIView.init()
         self.tableView.showsVerticalScrollIndicator = false
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "BookListTableViewCell")
         self.scrollView.addSubview(self.tableView)
         self.tableView.mas_makeConstraints { (make: MASConstraintMaker?) in
             make?.left.mas_equalTo()(0)
             make?.right.mas_equalTo()(-10)
-            make?.top.mas_equalTo()(20)
+            make?.top.mas_equalTo()(searchView.mas_bottom)?.offset()(10)
             make?.width.mas_equalTo()(screenWidth - 10)
             make?.height.mas_equalTo()(screenHeight - 120)
         }
@@ -76,6 +88,72 @@ class BookListViewController: UIViewController {
         footer.setTitle("上拉加载更多数", for: .idle)
         
         self.tableView!.mj_footer = footer
+    }
+    
+    
+    func initSearchView(){
+        
+        searchBar = UISearchBar.init()
+        
+        searchBar.setBackgroundImage(UIColor.backgroundColor().trans2Image(), for: .any, barMetrics: .default)
+        
+        searchBar.placeholder = "搜索书城"
+        
+        searchBar.barTintColor = .white
+        
+        searchBar.showsCancelButton = false
+        
+        searchBar.delegate = self
+        
+        searchView = UIView.init()
+        
+        searchView.backgroundColor = .backgroundColor()
+        
+        let searchField = searchBar.value(forKey: "searchField") as! UITextField
+        
+        searchField.text = self.keyWord
+        
+        searchView.addSubview(searchBar)
+        searchBar.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.left.mas_equalTo()(5)
+            make.width.mas_equalTo()(screenWidth - 60)
+            make.height.mas_equalTo()(50)
+        }
+        
+        let cancelBtn = UIButton.init()
+        cancelBtn.setTitle("取消", for: .normal)
+        cancelBtn.setTitleColor(.colorBlue(), for: .normal)
+        cancelBtn.addTarget(self, action: #selector(clickCancelButton), for: .touchDown)
+        searchView.addSubview(cancelBtn)
+        cancelBtn.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.top.mas_equalTo()(7)
+            make.height.mas_equalTo()(35)
+            make.right.mas_equalTo()(-10)
+        }
+        
+        self.view.addSubview(searchView)
+        
+        searchView.mas_makeConstraints { (make: MASConstraintMaker!) in
+            make.top.mas_equalTo()(self.view.mas_safeAreaLayoutGuideTop)
+            make.width.mas_equalTo()(screenWidth)
+            make.height.mas_equalTo()(50)
+        }
+        
+    }
+    
+    @objc func clickCancelButton(){
+        searchBar.resignFirstResponder()
+        
+        let searchField = searchBar.value(forKey: "searchField") as! UITextField
+        
+        searchField.text = ""
+        
+        self.keyWord = searchField.text
+        
+        self.bookList = []
+        
+        initBookData()
+        
     }
     
     //顶部下拉刷新
@@ -149,11 +227,12 @@ extension BookListViewController: UITableViewDataSource, UITableViewDelegate, UI
     
     func initBookData() {
         let url = "cloud/api/book/list"
-        let param:[String:Any] = ["type": self.bookType, "pageNo": pageNo, "pageSize": pageSize]
+        let param:[String:Any] = ["type": self.bookType, "pageNo": pageNo, "pageSize": pageSize,
+                                  "keyWord": self.keyWord]
         AlamofireHelper.shareInstance.postRequest(url: url, params: param, completion: {(result, error) in
             let json = JSON(result as Any)
             let data = JSON(json["data"])
-            let code = json["errorCode"].int!
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code != 200 {
                 CLToast.cl_show(msg: "网络异常，请稍后重试")
                 return
@@ -176,6 +255,28 @@ extension BookListViewController: UITableViewDataSource, UITableViewDelegate, UI
             if self.total ==  self.bookList.count {
                 self.footer.setTitle("暂无更多数据", for: .idle)
             }
+            if self.bookList.count > 0 {
+                self.tableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: false)
+            }
+            
         })
+    }
+}
+
+extension BookListViewController: UISearchBarDelegate{
+    
+    /// 点击搜索事件
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchField = searchBar.value(forKey: "searchField") as! UITextField
+        
+        self.keyWord = searchField.text
+        
+        self.bookList = []
+        
+        initBookData()
+        
+        //收起键盘
+        searchBar.resignFirstResponder()
+        
     }
 }

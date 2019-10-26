@@ -93,7 +93,7 @@ class ReadingViewController: UIViewController {
         AlamofireHelper.shareInstance.getRequest(url: url, params: param, completion: {(result, error) in
             let json = JSON(result as Any)
             let index = json["data"]
-            let code = json["errorCode"].int!
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code != 200 {
                 CLToast.cl_show(msg: "网络异常，请稍后重试")
                 return

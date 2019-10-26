@@ -46,7 +46,7 @@ extension ReadViewScrollController{
         let param:[String : Any] = ["accountId": accountId, "deviceUniqueId":deviceUniqueId, "bookId": bookId, "bookChapterId": chapterId]
         AlamofireHelper.shareInstance.postRequest(url: url, params: param, completion: {(result, error) in
             let json = JSON(result as Any)
-            let code = json["errorCode"].int!
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code == 200 {
                 CLToast.cl_show(msg: "已加入书架")
                 return
@@ -93,6 +93,11 @@ extension ReadViewScrollController{
         if chapterModel.nextId == 0 {
             return
         }
+        
+        let loadingView = LoadingView.initLoadingView(view: self.view)
+        self.view.addSubview(loadingView)
+        self.view.bringSubviewToFront(loadingView)
+        
         let deviceUUID = ReaderUtil.getDeviceUUID()
         let accountId = ReadUserDefaults.integer("ACCOUNT_ID")
         let url = "/cloud/api/book/chapter/" + String(self.bookId) + "/" + String(self.chapterId)
@@ -131,6 +136,12 @@ extension ReadViewScrollController{
                     self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
                 }
             })
+            
+            self.view.subviews.forEach({ (subView: UIView) in
+                if subView is LoadingView{
+                    subView.removeFromSuperview()
+                }
+            })
         })
     }
     
@@ -145,6 +156,32 @@ extension ReadViewScrollController{
         }
     }
     
+    /// 点击目录
+    func clickCatalogue() {
+        
+        loadBookDetail()
+        
+    }
+    
+    // 获取书详情
+    func loadBookDetail() {
+        let url = "cloud/api/book/detail/" + String(self.chapterModel.bookId)
+        AlamofireHelper.shareInstance.postRequest(url: url, params: [:], completion: {(result, error) in
+            let json = JSON(result as Any)
+            let bookDetail = JSON(json["data"])
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
+            if code != 200 {
+                CLToast.cl_show(msg: "网络异常，请稍后重试")
+                return
+            }
+            let chapterCount = bookDetail["chapterCount"].int!
+           
+            let controller = BookContentViewController()
+            controller.initChapterList(chapterCount: chapterCount, bookId: self.chapterModel.bookId)
+            self.navigationController?.pushViewController(controller, animated: false)
+        })
+    }
+    
 }
 
 @objc protocol ReadMenuDelegate:NSObjectProtocol {
@@ -154,5 +191,7 @@ extension ReadViewScrollController{
     @objc func addBookToShelf()
     
     @objc func backToPreviousController()
+    
+    @objc func clickCatalogue()
 
 }

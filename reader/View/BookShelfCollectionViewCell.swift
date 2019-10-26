@@ -19,7 +19,6 @@ class BookShelfCollectionViewCell: UICollectionViewCell {
             cellView.removeFromSuperview()
         }
         
-        
         let coverImageView = UIImageView.init(image: UIImage.init(named: coverUrl));
         coverImageView.sd_setImage(with: URL(string: coverUrl), placeholderImage: UIImage(named: ""))
         self.contentView.addSubview(coverImageView)
@@ -39,5 +38,6 @@ class BookShelfCollectionViewCell: UICollectionViewCell {
         }
         
     }
+
     
 }

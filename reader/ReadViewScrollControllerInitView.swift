@@ -10,7 +10,6 @@ import UIKit
 
 extension ReadViewScrollController: ReadMenuDelegate{
     
-    
     func initContentView(){
         // 阅读使用范围
         let readRect = DZM_READ_RECT!
@@ -28,14 +27,8 @@ extension ReadViewScrollController: ReadMenuDelegate{
         tableView.dataSource = self
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
-        ///tableView.separatorStyle = .none
         view.addSubview(tableView)
-        tableView.frame = CGRect(x: readRect.minX, y: readRect.minY + topView.frame.height, width: readRect.width, height: readRect.height - topViewHeight - bottomViewHeight)
-        
-        // 底部状态栏
-        bottomView = ReadingViewBottomView()
-        view.addSubview(bottomView)
-        bottomView.frame = CGRect(x: readRect.minX, y: readRect.maxY - bottomViewHeight, width: readRect.width, height: bottomViewHeight)
+        tableView.frame = CGRect(x: readRect.minX, y: readRect.minY + topView.frame.height + 10, width: readRect.width, height: readRect.height - topViewHeight - bottomViewHeight)
         
         //上刷新相关设置
         footer.setRefreshingTarget(self, refreshingAction: #selector(footerLoad))
@@ -90,7 +83,7 @@ extension ReadViewScrollController: ReadMenuDelegate{
             
             let y = isShow ? (screenHeight - bottomHeight) : screenHeight
             
-            self?.menuBottomView.frame.origin = CGPoint(x: 0, y: y)
+            self?.menuBottomView.frame.origin = CGPoint(x: 0, y: y + 50)
             
         }) { [weak self] (isOK) in
             
@@ -134,23 +127,23 @@ extension ReadViewScrollController: ReadMenuDelegate{
         
         
         // 绘制中间虚线(如果不需要虚线可以去掉自己加个分割线)
-        let shapeLayer:CAShapeLayer = CAShapeLayer()
-        
-        shapeLayer.bounds = menuBottomView.bounds
-        
-        shapeLayer.position = CGPoint(x: menuBottomView.frame.width / 2, y: menuBottomView.frame.height / 2)
-        
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        
-        shapeLayer.strokeColor = UIColor.color230().cgColor
-        
-        shapeLayer.lineWidth = 0.5
-        
-        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
-        
-        shapeLayer.lineDashPhase = 0
-        
-        shapeLayer.lineDashPattern = [NSNumber(value: 1), NSNumber(value: 2)]
+//        let shapeLayer:CAShapeLayer = CAShapeLayer()
+//
+//        shapeLayer.bounds = menuBottomView.bounds
+//
+//        shapeLayer.position = CGPoint(x: menuBottomView.frame.width / 2, y: menuBottomView.frame.height / 2)
+//
+//        shapeLayer.fillColor = UIColor.clear.cgColor
+//
+//        shapeLayer.strokeColor = UIColor.color230().cgColor
+//
+//        shapeLayer.lineWidth = 0.5
+//
+//        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+//
+//        shapeLayer.lineDashPhase = 0
+//
+//        shapeLayer.lineDashPattern = [NSNumber(value: 1), NSNumber(value: 2)]
         
         let path:CGMutablePath = CGMutablePath()
         
@@ -160,9 +153,9 @@ extension ReadViewScrollController: ReadMenuDelegate{
         
         path.addLine(to: CGPoint(x: menuBottomView.frame.width, y: height))
         
-        shapeLayer.path = path
+//        shapeLayer.path = path
         
-        menuBottomView.layer.addSublayer(shapeLayer)
+//        menuBottomView.layer.addSublayer(shapeLayer)
     }
     
 }
