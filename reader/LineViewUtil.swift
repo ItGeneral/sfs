@@ -58,6 +58,17 @@ class LineViewUtil: UIView {
         self.layer.addSublayer(shapeLayer)
     }
     
+    
+    /// 下划线
+    static func setBottomBorder(textField:UITextField, color: UIColor){
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = color.cgColor
+        border.frame = CGRect(x: 0, y: 45, width: screenWidth - 40, height: 1)
+        border.borderWidth = width
+        textField.layer.addSublayer(border)
+        textField.layer.masksToBounds = true
+    }
 
 
 }

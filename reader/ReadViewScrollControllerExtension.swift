@@ -40,7 +40,7 @@ extension ReadViewScrollController{
     
     /// 添加书架
     func addBookToShelf() {
-        let url = "/cloud/api/book/shelf/save/"
+        let url = "cloud/api/book/shelf/save/"
         let accountId = ReadUserDefaults.integer("ACCOUNT_ID")
         let deviceUniqueId = ReaderUtil.getDeviceUUID()
         let param:[String : Any] = ["accountId": accountId, "deviceUniqueId":deviceUniqueId, "bookId": bookId, "bookChapterId": chapterId]
@@ -48,12 +48,31 @@ extension ReadViewScrollController{
             let json = JSON(result as Any)
             let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
             if code == 200 {
+                self.menuTopView.addedShelf = true
+                self.menuTopView.mark.tintColor = .colorPinkRed()
                 CLToast.cl_show(msg: "已加入书架")
                 return
             }
         })
-        
     }
+    
+    func removeBookToShelf(){
+        let url = "cloud/api/book/shelf/delete/"
+        let accountId = ReadUserDefaults.integer("ACCOUNT_ID")
+        let deviceUniqueId = ReaderUtil.getDeviceUUID()
+        let param:[String : Any] = ["accountId": accountId, "deviceUniqueId":deviceUniqueId, "bookId": bookId, "bookChapterId": chapterId]
+        AlamofireHelper.shareInstance.postRequest(url: url, params: param, completion: {(result, error) in
+            let json = JSON(result as Any)
+            let code = json["errorCode"].type == SwiftyJSON.Type.null ? 500 : json["errorCode"].int!
+            if code == 200 {
+                CLToast.cl_show(msg: "已移除书架")
+                self.menuTopView.addedShelf = false
+                self.menuTopView.mark.tintColor = .color230()
+                return
+            }
+        })
+    }
+    
     
     /// 获取上一章或下一章数据
     /// 点击下一章 如果数组中已经有了下一章节的内容，则直接跳到对应的章节，否则请求网络数据加载到数组中
@@ -87,10 +106,10 @@ extension ReadViewScrollController{
     
     /// 加载网络数据
     func getBookChapterData(isNext: Bool) {
-        if chapterModel.previousId == 0 {
+        if chapterModel.previousId == 0 && !isNext{
             return
         }
-        if chapterModel.nextId == 0 {
+        if chapterModel.nextId == 0 && isNext{
             return
         }
         
@@ -100,7 +119,7 @@ extension ReadViewScrollController{
         
         let deviceUUID = ReaderUtil.getDeviceUUID()
         let accountId = ReadUserDefaults.integer("ACCOUNT_ID")
-        let url = "/cloud/api/book/chapter/" + String(self.bookId) + "/" + String(self.chapterId)
+        let url = "cloud/api/book/chapter/" + String(self.bookId) + "/" + String(self.chapterId)
         let param:[String : String] = ["deviceUniqueId": deviceUUID, "accountId": String(accountId)]
         AlamofireHelper.shareInstance.getRequest(url: url, params: param, completion: {(result, error) in
             let json = JSON(result as Any)
@@ -121,6 +140,7 @@ extension ReadViewScrollController{
             bookChapter.sortNo = index["sortNo"].int!
             bookChapter.content = "\t" + bookChapter.content.replacingOccurrences(of: "。 ", with: "。 \n\r\t")
             bookChapter.bookName = index["bookName"].string!
+            bookChapter.addedShelf = index["addedShelf"].bool!
             bookChapter.heightSize = CGFloat.init(Float(bookChapter.content.length))
             
             self.bookChapterList.append(bookChapter)
@@ -189,6 +209,8 @@ extension ReadViewScrollController{
     @objc func loadNextOrPreviousChapter(isNext:Bool)
     
     @objc func addBookToShelf()
+    
+    @objc func removeBookToShelf()
     
     @objc func backToPreviousController()
     

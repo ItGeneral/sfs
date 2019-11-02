@@ -35,9 +35,12 @@ class ReadUserDefaults: NSObject {
     // MARK: -- 存储
     
     /// 存储Object
-    class func setObject(_ value:Any?, _ key:String) {
+    class func setObject(_ value:Any!, _ key:String) {
         let defaults:UserDefaults = UserDefaults.standard
-        defaults.set(value, forKey: key)
+        
+        let data =  try! NSKeyedArchiver.archivedData(withRootObject: value!, requiringSecureCoding: false)
+        
+        defaults.set(data, forKey: key)
         defaults.synchronize()
     }
     
@@ -91,7 +94,14 @@ class ReadUserDefaults: NSObject {
     /// 获取Object
     class func object(_ key:String) -> Any? {
         let defaults:UserDefaults = UserDefaults.standard
-        return defaults.object(forKey: key)
+        
+        let data = defaults.object(forKey: key)
+        
+        if data != nil {
+            return  try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data as! Data)
+        }
+        
+        return data
     }
     
     /// 获取String

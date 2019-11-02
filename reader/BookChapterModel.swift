@@ -49,6 +49,9 @@ class BookChapterModel: NSObject {
     
     /// 书名
     var bookName:String!
+    
+    /// 是否已添加书架 true:已添加书架 false:未添加书架
+    var addedShelf:Bool!
  
    
     

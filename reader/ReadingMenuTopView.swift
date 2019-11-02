@@ -15,8 +15,9 @@ class ReadingMenuTopView: UIView {
     private var backImageView:UIImageView!
     
     /// 书签
-    private var mark:UIButton!
+    var mark:UIButton!
     
+    var addedShelf:Bool! = false
     
     var delegate: ReadMenuDelegate!
 
@@ -38,7 +39,7 @@ class ReadingMenuTopView: UIView {
         mark = UIButton(type:.custom)
         mark.contentMode = .center
         mark.setImage(UIImage(named:"mark")!.withRenderingMode(.alwaysTemplate), for: .normal)
-        mark.addTarget(self, action: #selector(addBookToShelf), for: .touchUpInside)
+        mark.addTarget(self, action: #selector(changeBookToShelf), for: .touchUpInside)
         addSubview(mark)
         mark.mas_makeConstraints { (make: MASConstraintMaker!) in
             make.right.mas_equalTo()(-20)
@@ -56,19 +57,28 @@ class ReadingMenuTopView: UIView {
         delegate.backToPreviousController()
     }
     
-    @objc func addBookToShelf(){
-        
-        delegate.addBookToShelf()
+    @objc func changeBookToShelf(){
         
         mark.isSelected = !mark.isSelected
+        
+        if !addedShelf {
+            delegate.addBookToShelf()
+        }else{
+            delegate.removeBookToShelf()
+        }
+        
         updateMarkButton()
     }
     
     /// 刷新书签按钮显示状态
     func updateMarkButton(){
-        if mark.isSelected {
+    
+        if mark.isSelected || addedShelf {
+            
             mark.tintColor = .colorPinkRed()
+            
         }else{
+            
             mark.tintColor = .color230()
         }
     }

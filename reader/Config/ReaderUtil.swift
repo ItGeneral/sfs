@@ -59,6 +59,21 @@ extension UIColor {
         return UIColor(r: 253, g: 85, b: 103)
     }
     
+    class func color250() -> UIColor {
+        return  UIColor(r: 250, g: 250, b: 250)
+    }
+    
+    /// 夜间字体背景灰色 113
+    class func color113() -> UIColor {
+        return UIColor(r: 113, g: 113, b: 113)
+    }
+    
+    /// 蓝色按钮
+    class func colorButtonBlue() -> UIColor {
+        return UIColor(r: 61, g: 163, b: 93)
+    }
+    
+    
     //颜色转图片
     func trans2Image() -> UIImage {
         let rect = CGRect(x: 0, y: 0, width: 1.0, height: 1.0)

@@ -125,26 +125,6 @@ extension ReadViewScrollController: ReadMenuDelegate{
         
         menuBottomView.frame = CGRect(x: 0, y: y, width: screenWidth, height: screenHeight)
         
-        
-        // 绘制中间虚线(如果不需要虚线可以去掉自己加个分割线)
-//        let shapeLayer:CAShapeLayer = CAShapeLayer()
-//
-//        shapeLayer.bounds = menuBottomView.bounds
-//
-//        shapeLayer.position = CGPoint(x: menuBottomView.frame.width / 2, y: menuBottomView.frame.height / 2)
-//
-//        shapeLayer.fillColor = UIColor.clear.cgColor
-//
-//        shapeLayer.strokeColor = UIColor.color230().cgColor
-//
-//        shapeLayer.lineWidth = 0.5
-//
-//        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
-//
-//        shapeLayer.lineDashPhase = 0
-//
-//        shapeLayer.lineDashPattern = [NSNumber(value: 1), NSNumber(value: 2)]
-        
         let path:CGMutablePath = CGMutablePath()
         
         let height = 55 * (screenWidth / 375)
@@ -152,10 +132,7 @@ extension ReadViewScrollController: ReadMenuDelegate{
         path.move(to: CGPoint(x: 0, y: height))
         
         path.addLine(to: CGPoint(x: menuBottomView.frame.width, y: height))
-        
-//        shapeLayer.path = path
-        
-//        menuBottomView.layer.addSublayer(shapeLayer)
+    
     }
     
 }

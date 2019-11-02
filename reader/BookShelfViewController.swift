@@ -78,7 +78,7 @@ class BookShelfViewController: UIViewController {
     /// 去书城添加书架
     @objc func doAddBookShelf(){
         
-        self.tabBarController?.selectedIndex = 0
+        self.tabBarController?.selectedIndex = 1
         
     }
     

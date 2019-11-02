@@ -27,6 +27,17 @@
 		9A393312235D520A00409C23 /* LineViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A393311235D520A00409C23 /* LineViewUtil.swift */; };
 		9A393316235D5D3D00409C23 /* ReadUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A393315235D5D3D00409C23 /* ReadUserDefaults.swift */; };
 		9A393318235D8B8A00409C23 /* ReadingMenuTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A393317235D8B8A00409C23 /* ReadingMenuTopView.swift */; };
+		9A39344323695AED00FEBE8C /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A39344223695AED00FEBE8C /* UserInfoModel.swift */; };
+		9A39344723695BED00FEBE8C /* UserInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A39344623695BED00FEBE8C /* UserInfoCell.swift */; };
+		9A39344A23695D0C00FEBE8C /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A39344923695D0C00FEBE8C /* UserInfoView.swift */; };
+		9A39344C2369B60B00FEBE8C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A39344B2369B60B00FEBE8C /* LoginViewController.swift */; };
+		9A39344E236ACE1100FEBE8C /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A39344D236ACE1000FEBE8C /* SettingViewController.swift */; };
+		9A393450236AD92000FEBE8C /* MyReadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A39344F236AD92000FEBE8C /* MyReadingViewController.swift */; };
+		9A393452236ADB4E00FEBE8C /* ReadHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A393451236ADB4E00FEBE8C /* ReadHistoryModel.swift */; };
+		9A393454236ADD9700FEBE8C /* ReadHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A393453236ADD9700FEBE8C /* ReadHistoryCell.swift */; };
+		9A393456236D64D500FEBE8C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A393455236D64D500FEBE8C /* RegisterViewController.swift */; };
+		9A393458236DBB4500FEBE8C /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A393457236DBB4500FEBE8C /* FeedbackViewController.swift */; };
+		9A39345A236DC5F100FEBE8C /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A393459236DC5F100FEBE8C /* MyAccountViewController.swift */; };
 		9A70222A2341DEF000A65941 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7022292341DEF000A65941 /* AppDelegate.swift */; };
 		9A70222C2341DEF000A65941 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A70222B2341DEF000A65941 /* ViewController.swift */; };
 		9A70222F2341DEF000A65941 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A70222D2341DEF000A65941 /* Main.storyboard */; };
@@ -51,7 +62,6 @@
 		9AECA4F6235DAAC00070984F /* ReadViewScrollControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4F5235DAAC00070984F /* ReadViewScrollControllerExtension.swift */; };
 		9AECA4F8235DAC030070984F /* ReadViewScrollControllerInitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4F7235DAC030070984F /* ReadViewScrollControllerInitView.swift */; };
 		9AECA4FA235EA3840070984F /* ReadColorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4F9235EA3840070984F /* ReadColorConfig.swift */; };
-		9AECA4FC235EDCCC0070984F /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4FB235EDCCC0070984F /* AccountInfo.swift */; };
 		9AECA4FE236142080070984F /* BookSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4FD236142080070984F /* BookSearchController.swift */; };
 		9AECA500236292030070984F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA4FF236292030070984F /* BaseViewController.swift */; };
 		9AECA50223649A570070984F /* ReadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AECA50123649A560070984F /* ReadingContentView.swift */; };
@@ -96,6 +106,17 @@
 		9A393311235D520A00409C23 /* LineViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewUtil.swift; sourceTree = "<group>"; };
 		9A393315235D5D3D00409C23 /* ReadUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadUserDefaults.swift; sourceTree = "<group>"; };
 		9A393317235D8B8A00409C23 /* ReadingMenuTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingMenuTopView.swift; sourceTree = "<group>"; };
+		9A39344223695AED00FEBE8C /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
+		9A39344623695BED00FEBE8C /* UserInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoCell.swift; sourceTree = "<group>"; };
+		9A39344923695D0C00FEBE8C /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
+		9A39344B2369B60B00FEBE8C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9A39344D236ACE1000FEBE8C /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		9A39344F236AD92000FEBE8C /* MyReadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReadingViewController.swift; sourceTree = "<group>"; };
+		9A393451236ADB4E00FEBE8C /* ReadHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadHistoryModel.swift; sourceTree = "<group>"; };
+		9A393453236ADD9700FEBE8C /* ReadHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadHistoryCell.swift; sourceTree = "<group>"; };
+		9A393455236D64D500FEBE8C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		9A393457236DBB4500FEBE8C /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		9A393459236DC5F100FEBE8C /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		9A7022262341DEF000A65941 /* reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A7022292341DEF000A65941 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A70222B2341DEF000A65941 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -127,7 +148,6 @@
 		9AECA4F5235DAAC00070984F /* ReadViewScrollControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewScrollControllerExtension.swift; sourceTree = "<group>"; };
 		9AECA4F7235DAC030070984F /* ReadViewScrollControllerInitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewScrollControllerInitView.swift; sourceTree = "<group>"; };
 		9AECA4F9235EA3840070984F /* ReadColorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadColorConfig.swift; sourceTree = "<group>"; };
-		9AECA4FB235EDCCC0070984F /* AccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfo.swift; sourceTree = "<group>"; };
 		9AECA4FD236142080070984F /* BookSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchController.swift; sourceTree = "<group>"; };
 		9AECA4FF236292030070984F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9AECA50123649A560070984F /* ReadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingContentView.swift; sourceTree = "<group>"; };
@@ -217,6 +237,7 @@
 		9A393310235D51E900409C23 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				9A393315235D5D3D00409C23 /* ReadUserDefaults.swift */,
 				9A393311235D520A00409C23 /* LineViewUtil.swift */,
 			);
 			name = Util;
@@ -225,10 +246,35 @@
 		9A393314235D5D2800409C23 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				9A393315235D5D3D00409C23 /* ReadUserDefaults.swift */,
 				9AECA4F9235EA3840070984F /* ReadColorConfig.swift */,
 			);
 			name = Config;
+			sourceTree = "<group>";
+		};
+		9A39344123695ABF00FEBE8C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9A39344223695AED00FEBE8C /* UserInfoModel.swift */,
+				9A393451236ADB4E00FEBE8C /* ReadHistoryModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9A39344523695BD700FEBE8C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9A39344623695BED00FEBE8C /* UserInfoCell.swift */,
+				9A393453236ADD9700FEBE8C /* ReadHistoryCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		9A39344823695CFB00FEBE8C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9A39344923695D0C00FEBE8C /* UserInfoView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		9A70221D2341DEF000A65941 = {
@@ -339,8 +385,16 @@
 		9ACF702D23436BBB00ED8297 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				9A39344823695CFB00FEBE8C /* View */,
+				9A39344523695BD700FEBE8C /* Cell */,
+				9A39344123695ABF00FEBE8C /* Model */,
 				9ACF702E23436BDB00ED8297 /* UserViewController.swift */,
-				9AECA4FB235EDCCC0070984F /* AccountInfo.swift */,
+				9A39344B2369B60B00FEBE8C /* LoginViewController.swift */,
+				9A39344D236ACE1000FEBE8C /* SettingViewController.swift */,
+				9A39344F236AD92000FEBE8C /* MyReadingViewController.swift */,
+				9A393455236D64D500FEBE8C /* RegisterViewController.swift */,
+				9A393457236DBB4500FEBE8C /* FeedbackViewController.swift */,
+				9A393459236DC5F100FEBE8C /* MyAccountViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -553,9 +607,13 @@
 			files = (
 				9A393318235D8B8A00409C23 /* ReadingMenuTopView.swift in Sources */,
 				9A393306235AE46A00409C23 /* ReadViewScrollController.swift in Sources */,
+				9A393456236D64D500FEBE8C /* RegisterViewController.swift in Sources */,
+				9A393458236DBB4500FEBE8C /* FeedbackViewController.swift in Sources */,
 				9A393316235D5D3D00409C23 /* ReadUserDefaults.swift in Sources */,
+				9A393450236AD92000FEBE8C /* MyReadingViewController.swift in Sources */,
 				9A2B32AA23478ED60016AC8D /* BookInfoModel.swift in Sources */,
 				9A2B32A4234732680016AC8D /* BookMallCollectionCell.swift in Sources */,
+				9A39344E236ACE1100FEBE8C /* SettingViewController.swift in Sources */,
 				9ACF702F23436BDB00ED8297 /* UserViewController.swift in Sources */,
 				9A39323C2357047E00409C23 /* LoadingView.swift in Sources */,
 				9A393304235AC5E900409C23 /* ReadPageModel.swift in Sources */,
@@ -566,9 +624,11 @@
 				9ACF703623444B4800ED8297 /* BookShelfCollectionViewCell.swift in Sources */,
 				9AECA4F4235DA5370070984F /* ReadingMenuBottomView.swift in Sources */,
 				9A393312235D520A00409C23 /* LineViewUtil.swift in Sources */,
-				9AECA4FC235EDCCC0070984F /* AccountInfo.swift in Sources */,
 				9ACF703123436CAC00ED8297 /* MyTabBarController.swift in Sources */,
 				9AECA50223649A570070984F /* ReadingContentView.swift in Sources */,
+				9A39344C2369B60B00FEBE8C /* LoginViewController.swift in Sources */,
+				9A39344723695BED00FEBE8C /* UserInfoCell.swift in Sources */,
+				9A39344323695AED00FEBE8C /* UserInfoModel.swift in Sources */,
 				9A7022652341E4D600A65941 /* AlamofireHelper.swift in Sources */,
 				9A2B32A22344D21E0016AC8D /* BookChapterModel.swift in Sources */,
 				9AECA4FE236142080070984F /* BookSearchController.swift in Sources */,
@@ -577,9 +637,11 @@
 				9A393309235AE5A000409C23 /* ReadTableView.swift in Sources */,
 				9A70222C2341DEF000A65941 /* ViewController.swift in Sources */,
 				9A70225E2341E3BF00A65941 /* Config.swift in Sources */,
+				9A39345A236DC5F100FEBE8C /* MyAccountViewController.swift in Sources */,
 				9ACF702C23436B9D00ED8297 /* BookMallViewController.swift in Sources */,
 				9A3932382353024C00409C23 /* BookDetailView.swift in Sources */,
 				9A70222A2341DEF000A65941 /* AppDelegate.swift in Sources */,
+				9A39344A23695D0C00FEBE8C /* UserInfoView.swift in Sources */,
 				9A70225B2341E36E00A65941 /* NavController.swift in Sources */,
 				9A852488234C2927003E9755 /* ReaderUtil.swift in Sources */,
 				9A2B32A8234747C80016AC8D /* BookListViewController.swift in Sources */,
@@ -587,10 +649,12 @@
 				9A85248C234D882A003E9755 /* BookListTableViewCell.swift in Sources */,
 				9A3932F5235AA74100409C23 /* ReadingViewBottomView.swift in Sources */,
 				9A39323A23559B3400409C23 /* BookContentViewController.swift in Sources */,
+				9A393452236ADB4E00FEBE8C /* ReadHistoryModel.swift in Sources */,
 				9A39330E235AEB4400409C23 /* ReadViewCell.swift in Sources */,
 				9A3932F3235AA70A00409C23 /* ReadingViewTopView.swift in Sources */,
 				9A3932FC235AAAE400409C23 /* ReadCoreText.swift in Sources */,
 				9A393300235AC50900409C23 /* String+Extension.swift in Sources */,
+				9A393454236ADD9700FEBE8C /* ReadHistoryCell.swift in Sources */,
 				9A2B32A62347479F0016AC8D /* BookDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

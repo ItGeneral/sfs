@@ -95,12 +95,19 @@ class BookMallViewController: UIViewController {
         }
 
         let allBookBtn = UIButton.init()
+        
         allBookBtn.setTitle("全部书籍", for: .normal)
+        
         allBookBtn.tintColor = .white
-        allBookBtn.backgroundColor = .color145()
+        
+        allBookBtn.backgroundColor = .colorBlue()
+        
         allBookBtn.layer.cornerRadius = 15
+        
         allBookBtn.addTarget(self, action: #selector(goToAllBookController), for: .touchDown)
+        
         searchView.addSubview(allBookBtn)
+        
         allBookBtn.mas_makeConstraints { (make: MASConstraintMaker!) in
             make.top.mas_equalTo()(7)
             make.left.mas_equalTo()(searchBar.mas_right)?.offset()(5)

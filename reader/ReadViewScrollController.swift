@@ -138,6 +138,14 @@ extension ReadViewScrollController: UITableViewDelegate,UITableViewDataSource,UI
             menuBottomView.nextChapter.textColor = .color230()
         }
         
+        /// 设置是否已加入书架
+        menuTopView.addedShelf = chapterModel.addedShelf
+        if chapterModel.addedShelf {
+            menuTopView.mark.tintColor = .colorPinkRed()
+        }else {
+            menuTopView.mark.tintColor = .color230()
+        }
+        
         return cell
     }
 
