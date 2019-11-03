@@ -11,10 +11,11 @@ import SwiftyJSON
 import CLToast
 import Masonry
 import MJRefresh
+import GoogleMobileAds
 
 let bottomHeight = TabBarHeight + 55 * (screenWidth / 375)
 
-class ReadViewScrollController: UIViewController {
+class ReadViewScrollController: UIViewController, GADBannerViewDelegate {
 
     /// 图书ID
     var bookId:Int!
@@ -63,6 +64,10 @@ class ReadViewScrollController: UIViewController {
     
     var locationChapter:Int! = 0
     
+    //广告
+    var bannerView: GADBannerView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,6 +76,20 @@ class ReadViewScrollController: UIViewController {
         view.backgroundColor = READ_COLOR_BG_0
         
         addSubviews()
+        
+        bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        
+        addBannerViewToView(bannerView)
+        
+        //配置 GADBannerView 属性
+        bannerView.adUnitID = AD_UNIT_ID
+        
+        bannerView.rootViewController = self
+        
+        //加载广告
+        bannerView.load(GADRequest())
+        
+        bannerView.delegate = self
         
     }
     
@@ -91,6 +110,65 @@ class ReadViewScrollController: UIViewController {
         
         // 添加单机手势
         initTapGestureRecognizer()
+    }
+    
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(bannerView)
+        
+        if #available(iOS 11.0, *) {
+            // In iOS 11, we need to constrain the view to the safe area.
+            positionBannerViewFullWidthAtBottomOfSafeArea(bannerView)
+        }
+        else {
+            // In lower iOS versions, safe area is not available so we use
+            // bottom layout guide and view edges.
+            positionBannerViewFullWidthAtBottomOfView(bannerView)
+        }
+    }
+    
+    // MARK: - view positioning
+    @available (iOS 11, *)
+    func positionBannerViewFullWidthAtBottomOfSafeArea(_ bannerView: UIView) {
+        // Position the banner. Stick it to the bottom of the Safe Area.
+        // Make it constrained to the edges of the safe area.
+        let guide = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            guide.leftAnchor.constraint(equalTo: bannerView.leftAnchor),
+            guide.rightAnchor.constraint(equalTo: bannerView.rightAnchor),
+            //guide.bottomAnchor.constraint(equalTo: bannerView.bottomAnchor)
+            //guide.centerXAnchor.constraint(equalTo: bannerView.centerXAnchor)
+            guide.centerYAnchor.constraint(equalTo: bannerView.centerYAnchor)
+            ])
+    }
+    
+    
+    
+    
+    func positionBannerViewFullWidthAtBottomOfView(_ bannerView: UIView) {
+        view.addConstraint(NSLayoutConstraint(item: bannerView,
+                                              attribute: .leading,
+                                              relatedBy: .equal,
+                                              toItem: view,
+                                              attribute: .leading,
+                                              multiplier: 1,
+                                              constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: bannerView,
+                                              attribute: .trailing,
+                                              relatedBy: .equal,
+                                              toItem: view,
+                                              attribute: .trailing,
+                                              multiplier: 1,
+                                              constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: bannerView,
+                                              attribute: .centerY,
+                                              relatedBy: .equal,
+                                              toItem: view.safeAreaLayoutGuide.centerYAnchor,
+                                              attribute: .top,
+                                              multiplier: 1,
+                                              constant: 0))
     }
     
     

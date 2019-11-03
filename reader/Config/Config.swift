@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-let REQUEST_URL = "http://192.168.1.3:8080/"
-//let REQUEST_URL = "http://www.songjiuhua.club:8080/"
+//let REQUEST_URL = "http://192.168.1.3:8080/"
+let REQUEST_URL = "http://www.songjiuhua.club:8080/"
 
 /// 屏幕的宽度
 let screenWidth = UIScreen.main.bounds.width
